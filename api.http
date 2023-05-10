@@ -2,17 +2,17 @@ POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
 
 {
-    "name": "areeba",
-    "age": "10"
+    "name": "Nayeem",
+    "age": "14"
 } 
 
 ###
-PUT http://localhost:3000/users/2 HTTP/1.1
+PUT http://localhost:3000/users/645b2a4d663f3be741e8158a HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Tamim",
-    "age": "13"
+    "title": "Mahin",
+    "age": "16"
 } 
 
 ###
@@ -22,9 +22,9 @@ get http://localhost:3000/users HTTP/1.1
 
 ###
 
-get http://localhost:3000/users/1 HTTP/1.1
+get http://localhost:3000/users/645b2a4d663f3be741e8158a HTTP/1.1
 
 
 ###
 
-delete http://localhost:3000/users/3 HTTP/1.1
+delete http://localhost:3000/users/645b15225a1688767b32cae4 HTTP/1.1

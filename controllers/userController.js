@@ -9,12 +9,14 @@ const users = [
     {name:"Tamim", age:"14"},
 ]
 
-const all = (req, res)=>{
-    res.json(users);
+const all = async (req, res)=>{
+    let newUser = await User.find().exec();
+    res.json(newUser);
 }
-const show = (req,res)=>{
+const show = async (req,res)=>{
     console.log(req.params.id)
-    res.json(users[req.params.id]);
+   let user = await User.findOne().where({"_id": req.params.id}).exec();
+   res.json(user);
 }
 const store = async (req, res)=>{
     const newUser = new User(req.body);
@@ -27,21 +29,29 @@ const store = async (req, res)=>{
     res.json(newUser);
     
 }
-const update = (req,res)=>{
-    let id = req.params.id;
+const update = async (req,res)=>{
+    let user = await User.findOne().where({"_id": req.params.id}).exec();
+    user.name = req.body.title;
+    user.age= req.body.age;
+    await TryCatch(user);
+    res.json(user)
+    /* let id = req.params.id;
     users[id] = {name:req.body.title,age:req.body.age}
     console.log(req.body);
-    res.json(users);
+    res.json(users); */
 }
 const deactivate = (req,res)=>{
     let id = req.params.id;
     users.splice(id, 1)
     res.json(users);
 }
-const destroy = (req,res)=>{
-    let id = req.params.id;
+const destroy = async (req,res)=>{
+    let user = await User.deleteOne().where({ "_id": req.params.id }).exec();
+    await TryCatch(user);
+    res.json(user);
+    /* let id = req.params.id;
     users.splice(id, 1)
-    res.json(users);
+    res.json(users); */
 }
 
 module.exports = {
