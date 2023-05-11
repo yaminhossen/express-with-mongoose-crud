@@ -10,7 +10,7 @@ const users = [
 ]
 
 const cheak_request = async function(req, res, next) {
-    // console.log(req.headers);
+    console.log(req.headers, req.origin);
     const {authorization} = req.headers;
     if(!authorization){
         res.status(401).send("access denies!! auth required");
