@@ -1,6 +1,7 @@
 const express = require('express');
 const { all, show, store, update, destroy, deactivate, login, register } = require('../controllers/userController');
 const router = express.Router();
+var jwt = require('jsonwebtoken');  
 
 const users = [
     {name:"Yamin", age:"22"},
@@ -8,20 +9,21 @@ const users = [
     {name:"Tamim", age:"16"},
 ]
 
-const cheak_request = function(req, res, next) {
+const cheak_request = async function(req, res, next) {
     // console.log(req.headers);
     const {authorization} = req.headers;
     if(!authorization){
         res.status(401).send("access denies!! auth required");
     }else{
         let [prefix, token] = authorization.split(" ");
-        if(prefix != "mytoken"){
-            return res.status(422).send("unprocessible token.")
+        if(prefix != "Bearer"){
+            return res.status(422).send("unprocessible token, Bearer missing")
         }
-        if(token != "xxx"){
+        if(!token){
             return res.status(498).send("invalid token")
         }
-        console.log(prefix, token)
+        var decoded = await jwt.verify(token, "3he5jmb3u3v")
+        console.log(decoded)
     }
     next();
 } 

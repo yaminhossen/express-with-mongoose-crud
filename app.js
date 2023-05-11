@@ -7,7 +7,17 @@ const bodyParser = require('body-parser');
 const user_routes = require('./routes/user_routes');
 const routes = require("./routes/routes");
 const userSchema = require('./schemas/userSchema');
+const cookieSession = require('cookie-session');
 
+
+app.use(
+    cookieSession({
+    name: 'session',
+    keys: ["my secret"],
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+})
+);
 
 // middleware setup
 app.use(cors());
@@ -23,7 +33,37 @@ app.set('json spaces', 4);
 
 // home page or routes
 app.get('/', (req, res) =>{
-    res.send('Wellcome to the home page')
+    res.send(`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <ul id="list">
+    
+        </ul>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            
+            axios.post('/users/login',{
+                "name": "Mahin",
+                "email": "m@a.com",
+                "id": "645b2a65663f3be741e8158c"
+           },{
+            headers:{
+               'Content-type': 'application/json'
+            }
+           })
+           .then(res => {
+                console.log(res.data)
+           })
+            
+        </script>
+    </body>
+    </html>`)
 })
 
 

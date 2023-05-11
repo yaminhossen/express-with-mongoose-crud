@@ -75,7 +75,8 @@ module.exports = {
         if(!user){
            return res.status(422).send("unprocessible entity, user not found");
         } 
-        const token_res = await jwt.sign({name, email, id}, '3he5jmb3u3v');
+        const token_res = await jwt.sign({name, email, id, origin: req.origin}, '3he5jmb3u3v');
+        res.cookie('token', token_res);
         res.status(201).json({token: token_res, name, email});
         console.log(token_res)
     },
