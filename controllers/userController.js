@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const userSchema = require('../schemas/userSchema');
 const User = new mongoose.model("user",userSchema);
 const TryCatch = require("../models/hooks/TryCatch");
+var jwt = require('jsonwebtoken');  
 
 const users = [
     {name:"Yamin", age:"22"},
@@ -60,5 +61,11 @@ module.exports = {
     store,
     update,
     deactivate,
-    destroy
+    destroy,
+    register: async  function(req, res){
+        const {name, email} = req.body; 
+        const token_res = await jwt.sign({name, email}, '3he5jmb3u3v');
+        res.status(201).json({token: token_res, name, email});
+        console.log(token_res)
+    }
 }
