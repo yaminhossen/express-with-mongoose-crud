@@ -1,9 +1,19 @@
-post http://localhost:3000/users/login HTTP/1.1
+post http://localhost:3000/users/register HTTP/1.1
 content-type: application/json
 
 {
     "name": "Mahin",
     "email": "m@a.com"
+} 
+
+###
+post http://localhost:3000/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Mahin",
+    "email": "m@a.com",
+    "id": "645b2a65663f3be741e8158c"
 } 
 
 ###

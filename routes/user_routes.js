@@ -28,6 +28,7 @@ const cheak_request = function(req, res, next) {
 
 module.exports = router
        .post('/register', register)
+       .post('/login', login)
        .get('/',cheak_request, all)
        .get("/:id", show)
        .post("/",cheak_request, store)

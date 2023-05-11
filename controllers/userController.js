@@ -62,10 +62,21 @@ module.exports = {
     update,
     deactivate,
     destroy,
-    register: async  function(req, res){
+    register: async (req, res) =>{
         const {name, email} = req.body; 
         const token_res = await jwt.sign({name, email}, '3he5jmb3u3v');
         res.status(201).json({token: token_res, name, email});
         console.log(token_res)
-    }
+    },
+    login: async (req, res)=> {
+        const {name, email, id} = req.body;
+        const user = await User.where({_id: id}).findOne();
+      
+        if(!user){
+           return res.status(422).send("unprocessible entity, user not found");
+        } 
+        const token_res = await jwt.sign({name, email, id}, '3he5jmb3u3v');
+        res.status(201).json({token: token_res, name, email});
+        console.log(token_res)
+    },
 }
