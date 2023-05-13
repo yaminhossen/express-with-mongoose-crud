@@ -48,15 +48,7 @@ app.get('/', (req, res) =>{
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             
-            axios.post('/users/login',{
-                "name": "Mahin",
-                "email": "m@a.com",
-                "id": "645b2a65663f3be741e8158c"
-           },{
-            headers:{
-               'Content-type': 'application/json'
-            }
-           })
+            axios.get('/users')
            .then(res => {
                 console.log(res.data)
            })

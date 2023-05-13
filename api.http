@@ -1,11 +1,12 @@
 POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFoaW4iLCJlbWFpbCI6Im1AYS5jb20iLCJpZCI6IjY0NWIyYTY1NjYzZjNiZTc0MWU4MTU4YyIsImlhdCI6MTY4Mzc3NzkwNX0.KF08ow8LHEc1K0OpHn8RAzBSj_4lilktAX5CO2MXHYY 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFoaW4iLCJlbWFpbCI6Im1AYS5jb20iLCJpZCI6IjY0NWIyYTY1NjYzZjNiZTc0MWU4MTU4YyIsImlhdCI6MTY4Mzg2ODU1OX0.iSnH2nizMUBJbCC_WvNx0UWbhT1unPdm_u_GSlr64aY 
 
 {
     "name": "Nayeem",
     "age": "14"
 } 
+
 
 ###
 PUT http://localhost:3000/users/645b2a4d663f3be741e8158a HTTP/1.1

@@ -2,6 +2,7 @@ const express = require('express');
 const { all, show, store, update, destroy, deactivate, login, register } = require('../controllers/userController');
 const router = express.Router();
 var jwt = require('jsonwebtoken');  
+const cookieParser = require('cookie-parser');
 
 const users = [
     {name:"Yamin", age:"22"},
@@ -10,7 +11,8 @@ const users = [
 ]
 
 const cheak_request = async function(req, res, next) {
-    console.log(req.headers, req.origin);
+    console.log(req.headers, req.origin, req.cookies.token);
+    // console.log(req.cookies.token);
     const {authorization} = req.headers;
     if(!authorization){
         res.status(401).send("access denies!! auth required");
