@@ -2,7 +2,7 @@ const express = require('express');
 const { all, show, store, update, destroy, deactivate, login, register } = require('../controllers/userController');
 const router = express.Router();
 var jwt = require('jsonwebtoken');  
-const cookieParser = require('cookie-parser');
+
 
 const users = [
     {name:"Yamin", age:"22"},
@@ -13,20 +13,26 @@ const users = [
 const cheak_request = async function(req, res, next) {
     console.log(req.headers, req.origin, req.cookies.token);
     // console.log(req.cookies.token);
-    const {authorization} = req.headers;
-    if(!authorization){
-        res.status(401).send("access denies!! auth required");
-    }else{
-        let [prefix, token] = authorization.split(" ");
-        if(prefix != "Bearer"){
-            return res.status(422).send("unprocessible token, Bearer missing")
-        }
-        if(!token){
+    // const {authorization} = req.headers;
+    // if(!authorization){
+    //     res.status(401).send("access denies!! auth required");
+    // }else{
+    //     let [prefix, token] = authorization.split(" ");
+    //     if(prefix != "Bearer"){
+    //         return res.status(422).send("unprocessible token, Bearer missing")
+    //     }
+    //     if(!token){
+    //         return res.status(498).send("invalid token")
+    //     }
+    //     var decoded = await jwt.verify(token, "3he5jmb3u3v")
+    //     console.log(decoded)
+    // }
+    if(!req.cookies.token){
             return res.status(498).send("invalid token")
         }
-        var decoded = await jwt.verify(token, "3he5jmb3u3v")
-        console.log(decoded)
-    }
+        var decoded = await jwt.verify(req.cookies.token, "3he5jmb3u3v")
+        console.log(decoded);
+    
     next();
 } 
 
@@ -50,4 +56,4 @@ module.exports = router
             <button>submit</button>
         </form>
         `)
-    }); 
+    });  

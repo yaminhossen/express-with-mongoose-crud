@@ -9,7 +9,8 @@ const routes = require("./routes/routes");
 const userSchema = require('./schemas/userSchema');
 const cookieSession = require('cookie-session');
 
-
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
 app.use(
     cookieSession({
     name: 'session',
